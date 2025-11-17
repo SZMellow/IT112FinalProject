@@ -1,2 +1,2 @@
 # IT112FinalProject
-Final Group Project for IT112 (Intro to Computing)
+Final Group Project for IT112 (Computer Programming 1)

@@ -19,13 +19,19 @@ Main Tasks
 ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 
-1. Jose
-2. a
-3. a
-4. a
-5. a
-6. Elvin
-7. a
+1 - Room Inventory : OLARTE, JOSE IV BICOL
+
+2 - Main Menu : 
+
+3 - Room Availability : 
+
+4 - Reservations : 
+
+5 - Check-In : 
+
+6 - Check-Out & Billing : GATBONTON, ELVIN MAMARIL
+
+7 - Payment System : 
 
 
 

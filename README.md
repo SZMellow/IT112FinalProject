@@ -25,7 +25,7 @@ Main Tasks
 
 3 - Room Availability : 
 
-4 - Reservations : 
+4 - Reservations : ITCHON, LORENZ ANNE ESPINOSA
 
 5 - Check-In : 
 

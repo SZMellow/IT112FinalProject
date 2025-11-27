@@ -27,6 +27,16 @@ public class FinalProjectGroup6 {
     // ============================================================
     public static void initializeRooms() {
         // TODO: Fill roomNumbers, roomTypes, roomRates, roomStatus
+        //Standard rooms
+        public int[][] standardRooms = new int[15][10];
+        //Deluxe rooms
+        public int[][] deluxeRooms = new int[10][10];
+        //Suite rooms
+        public int[][] suiteRooms = new int[5][10];
+
+        /*First array will indicate room number in respective room types
+          Second array will indicate the day
+          int values: 0 = Vacant 1 = Booked 2 = Occupied*/
     }
 
     public static void initializeCalendar() {
@@ -157,3 +167,4 @@ public class FinalProjectGroup6 {
     }
 
 }
+

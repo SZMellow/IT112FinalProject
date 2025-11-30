@@ -150,13 +150,11 @@ public class FinalProjectGroup6 {
                 }
             }
             if (available) {
-                // Step 4: Reserve all selected days
                 for (int day : selectedDays) {
                     room[i][day] = "Reserved";
                 }
                 reserved = true;
-
-                // Step 5: Print summary once
+                
                 System.out.println("Processing Reservation...");
                 System.out.println("Found: " + roomNames[i]);
                 System.out.println("Reservation Fee (Room Rate Only): P" + fee + "/night * " + daysToReserve + " nights = P" + (fee * daysToReserve));
@@ -252,4 +250,5 @@ public class FinalProjectGroup6 {
     }
 
 }
+
 

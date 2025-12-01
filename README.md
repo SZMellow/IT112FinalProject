@@ -23,7 +23,7 @@ Main Tasks
 
 2 - Main Menu : 
 
-3 - Room Availability : 
+3 - Room Availability : LANSANGAN, JULIANNE ELYSE JOSE
 
 4 - Reservations : ITCHON, LORENZ ANNE ESPINOSA
 

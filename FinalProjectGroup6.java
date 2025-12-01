@@ -203,23 +203,23 @@ public class FinalProjectGroup6 {
         System.out.print("Input Guest Name (Walk-in): ");
         String guestName = sc.nextLine();
         System.out.print("Input Room Type: (1. Standard, 2. Deluxe, 3. Suite): ");
-        int roomChoice = Integer.parseInt(sc.nextLine());
+        int roomType = Integer.parseInt(sc.nextLine());
         
         // setting the room descr, starting and ending point of finding rooms based sa user input and checking if its valid choice otherwise make user reenter
         while (true) {
-            if (roomChoice == 1) { 
+            if (roomType == 1) { 
                 roomTypeName = "Standard";
                 roomFee = 2500;
                 startIndex = 0;
                 endIndex = 15;
                 break;
-            } else if (roomChoice == 2)  {
+            } else if (roomType == 2)  {
                 roomTypeName = "Deluxe";
                 roomFee = 4000;
                 startIndex = 15;
                 endIndex = 25;
                 break;
-                } else if (roomChoice == 3) {
+                } else if (roomType == 3) {
                 roomTypeName = "Suite";
                 roomFee = 8000;
                 startIndex = 25;
@@ -228,7 +228,7 @@ public class FinalProjectGroup6 {
             } else {
                 System.out.println("Error! Please re-enter a valid room type.");
                 System.out.print("Input Room Type: (1. Standard, 2. Deluxe, 3. Suite): ");
-                roomChoice = sc.nextInt();
+                roomType = sc.nextInt();
             }
         }
 
@@ -242,17 +242,36 @@ public class FinalProjectGroup6 {
             System.out.print("Input Nights Booked: ");
             nights = sc.nextInt();
             }
-    
+
+        // prints text saying its checking if rooms are avail (idk nasa sample output)
         System.out.println("Processing Walk-in Check-In... Checking for available " + roomTypeName + " rooms (₱" + roomFee + "/night)...");
+
+        // init of vars to  be used in the algo in finding avail rooms
+        int roomIndex = -1; // placeholder -1 is not avalid index for arrays so it means no room is found yet
+        int startDay = 0; 
         
-        int roomIndex = -1;
-        int startDay = 0;
+        // main algo for finding if there are avail rooms
         for (int i = startIndex; i < endIndex; i++) {
             if (roomStatus[i].equals("Available") && isRoomFreeForDays(i, startDay, nights)) {
+                // if room is avail, we store the index in roomIndex
                 roomIndex = i;
                 break;
             }
         }
+
+        // this only triggers kung after checking at still no free room, meaning roomIndex will stay -1
+        if (roomIndex == -1) {
+            System.out.println("No " + roomTypeName + " room available for " + nights + " nights.");
+            return;
+        }
+
+        // init of the rooms details
+        String roomNum = roomNumbers[roomIndex];
+        int totalPayment = roomFee * nights;
+
+        System.out.println("Room Found: " + roomNum);
+        System.out.println("Input Payment (Room Only, ₱8,000 * " + nights + "): ");
+
     }
 
     // ============================================================
@@ -322,6 +341,7 @@ public class FinalProjectGroup6 {
     }
 
 }
+
 
 
 

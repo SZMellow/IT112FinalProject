@@ -1,4 +1,4 @@
-import java.util.*;
+tyimport java.util.*;
 
 public class FinalProjectGroup6 {
 
@@ -192,29 +192,38 @@ public class FinalProjectGroup6 {
         // TODO: Update roomStatus = "Occupied"
         // TODO: Fill occupancy[][]
 
+        // init of variables we gonna use
         Scanner sc = new Scanner(System.in);
+        String roomTypeName = "empty";
+        int startIndex;
+        int endIndex;
+        int roomFee = 0;
 
+        // get users name and room type
         System.out.print("Input Guest Name (Walk-in): ");
         String guestName = sc.nextLine();
         System.out.print("Input Room Type: (1. Standard, 2. Deluxe, 3. Suite): ");
         int roomChoice = Integer.parseInt(sc.nextLine());
-
-        // placeholders lang
-        String roomTypeName = "lala";
-        int roomFee = 0;
-
+        
+        // setting the room descr, starting and ending point of finding rooms based sa user input and checking if its valid choice otherwise make user reenter
         while (true) {
             if (roomChoice == 1) { 
                 roomTypeName = "Standard";
                 roomFee = 2500;
+                startIndex = 0;
+                endIndex = 15;
                 break;
             } else if (roomChoice == 2)  {
                 roomTypeName = "Deluxe";
-                roomExpense = 4000;
+                roomFee = 4000;
+                startIndex = 15;
+                endIndex = 25;
                 break;
                 } else if (roomChoice == 3) {
                 roomTypeName = "Suite";
-                roomExpense = 8000;
+                roomFee = 8000;
+                startIndex = 25;
+                endIndex = 30;
                 break;
             } else {
                 System.out.println("Error! Please re-enter a valid room type.");
@@ -222,7 +231,28 @@ public class FinalProjectGroup6 {
                 roomChoice = sc.nextInt();
             }
         }
+
+        // get users nights booked
+        System.out.print("Input Nights Booked: ");
+        int nights = sc.nextInt();;
         
+        // checking if user does not input negative or nights higher than 10
+        while (nights < 1 || nights > 10) {
+            System.out.println("Error! Please re enter a valid number of nights to be booked.");
+            System.out.print("Input Nights Booked: ");
+            nights = sc.nextInt();
+            }
+    
+        System.out.println("Processing Walk-in Check-In... Checking for available " + roomTypeName + " rooms (₱" + roomFee + "/night)...");
+        
+        int roomIndex = -1;
+        int startDay = 0;
+        for (int i = startIndex; i < endIndex; i++) {
+            if (roomStatus[i].equals("Available") && isRoomFreeForDays(i, startDay, nights)) {
+                roomIndex = i;
+                break;
+            }
+        }
     }
 
     // ============================================================
@@ -292,6 +322,7 @@ public class FinalProjectGroup6 {
     }
 
 }
+
 
 
 

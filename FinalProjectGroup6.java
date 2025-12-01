@@ -77,6 +77,73 @@ public class FinalProjectGroup6 {
     public static void checkRoomAvailability() {
         // TODO: Count available + booked rooms of a type
         // TODO: Print 10-day calendar
+        Scanner sc = new Scanner(System.in);
+
+        //Asks user for room type to check
+        System.out.print("\nInput Room Type to check: (1. Standard, 2. Deluxe, 3. Suite): ");
+        int choice = sc.nextInt();
+
+        String selectedType = "";
+        double price = 0;
+
+        //Convert the numerical choice to actual room type with price
+        if (choice == 1) { selectedType = "Standard"; price = 2500; }
+        else if (choice == 2) { selectedType = "Deluxe"; price = 4000; }
+        else if (choice == 3) { selectedType = "Suite"; price = 8000; }
+        else {
+            System.out.println("Invalid room type.");
+        return;
+        }
+
+        //Process ==> Count Total + Available Rooms (Available = Available + Booked)
+        int total = 0;
+        int available = 0;
+
+        for (int i = 0; i < roomTypes.length; i++) {
+            if (roomTypes[i] != null && roomTypes[i].equals(selectedType)) { // If room type matches
+            total++;
+                if (roomStatus[i] != null && !roomStatus[i].equals("Occupied")) {  // Count as "available" if NOT occupied
+                available++;
+                }
+            }
+        }
+
+        //Print Summary Header
+        System.out.println("Room Availability Status");
+        System.out.println("Room Type: " + selectedType);
+        System.out.println("Total Rooms: " + total);
+        System.out.println("Available Rooms: " + available);
+        System.out.println("Price per Night: ₱" + price);
+
+        //10-DAY CALENDAR TABLE
+        System.out.println();
+        System.out.print("\t"); // blank corner cell
+
+        //Print Day headers
+        for (int d = 1; d <= 10; d++) {
+            System.out.print("Day" + d + "\t");
+        }
+        System.out.println();
+
+        // Print rooms + their day statuses
+        for (int i = 0; i < roomTypes.length; i++) {
+            // Only show rooms of selected type
+            if (roomTypes[i] != null && roomTypes[i].equals(selectedType)) {
+                System.out.print(roomNumbers[i] + "\t"); // Display room number (e.g., D101)
+                for (int d = 0; d < 10; d++) { // For each of the 10 days
+                    if (occupancy[i][d] == null) { // If null → available
+                        System.out.print("\t");       // print blank
+                    }
+                    else { // Show the actual text: Booked or Occupied
+                        System.out.print(occupancy[i][d] + "\t");
+                    }
+                }
+                System.out.println(); // next room
+            }
+        }
+    }
+        
+
     }
 
     // ============================================================
@@ -260,5 +327,6 @@ public class FinalProjectGroup6 {
     }
 
 }
+
 
 

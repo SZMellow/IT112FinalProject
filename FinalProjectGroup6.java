@@ -188,9 +188,6 @@ public class FinalProjectGroup6 {
     // ============================================================
     public static void checkInGuest() {
         // TODO: Guest name, room type, room number, payment
-        // TODO: Validate availability
-        // TODO: Update roomStatus = "Occupied"
-        // TODO: Fill occupancy[][]
 
         // init of variables we gonna use
         Scanner sc = new Scanner(System.in);
@@ -249,7 +246,8 @@ public class FinalProjectGroup6 {
         // init of vars to  be used in the algo in finding avail rooms
         int roomIndex = -1; // placeholder -1 is not avalid index for arrays so it means no room is found yet
         int startDay = 0; 
-        
+
+        // TODO: Validate availability
         // main algo for finding if there are avail rooms
         for (int i = startIndex; i < endIndex; i++) {
             if (roomStatus[i].equals("Available") && isRoomFreeForDays(i, startDay, nights)) {
@@ -259,7 +257,7 @@ public class FinalProjectGroup6 {
             }
         }
 
-        // this only triggers kung after checking at still no free room, meaning roomIndex will stay -1
+        // after checking and still no free room, roomIndex will stay -1 and this triggers
         if (roomIndex == -1) {
             System.out.println("No " + roomTypeName + " room available for " + nights + " nights.");
             return;
@@ -269,9 +267,49 @@ public class FinalProjectGroup6 {
         String roomNum = roomNumbers[roomIndex];
         int totalPayment = roomFee * nights;
 
+        // prints that a room is found
         System.out.println("Room Found: " + roomNum);
-        System.out.println("Input Payment (Room Only, ₱8,000 * " + nights + "): ");
 
+        // init of variables in payment algo
+        int paid;
+        int choice;
+
+        // main algo for payment
+        while (true) {
+        System.out.print("Input Payment (Room Only, " + roomFee + " * " + nights + "): ");
+        paid = sc.nextInt();
+
+        // if user is rich, then break out of the while loop
+        if (paid >= totalPayment) {
+            System.out.println("Payment Successful.");
+            break;
+        }
+
+        // if user is broke, then ask if he wants to re enter his payment, otherwise return to main menu
+        System.out.println("Insufficient funds! You need to pay atleast ₱" + totalPayment);
+        System.out.print("Do you wish to continue the payment? (1. Yes, 2. No): ");
+        choice = sc.nextInt();
+        if (choice == 2) {
+            System.out.println("Check-in canceled.");
+            return;
+        }
+    }
+        
+        // TODO: Update roomStatus = "Occupied"
+        // sets the roomstatus to occupied
+        roomStatus[roomIndex] = "Occupied";
+
+        // TODO: Fill occupancy[][]
+        // sets all the nights inputed by user to be registrerd in his name
+        for (int d = 0; d < nights; d++) {
+        occupancy[roomIndex][d] = guestName;
+    }
+
+        // print the status of the rooms to occupied
+        System.out.println("Update Status: Room " + roomNum + " is now set to 'Occupied' by " + guestName + ".");
+        System.out.println("--- Check-In Successful ---");
+        // (nights > 1 ? "s." : ".") checks  kung the user's nights are more than 1, it adds a "s" if it is, else stay as "night"
+        System.out.println("Guest " + guestName + " is now occupying Room " + roomNum + " for " + nights + " night" + (nights > 1 ? "s." : "."));
     }
 
     // ============================================================
@@ -341,6 +379,7 @@ public class FinalProjectGroup6 {
     }
 
 }
+
 
 
 

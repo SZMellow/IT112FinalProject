@@ -31,7 +31,7 @@ Main Tasks
 
 6 - Check-Out & Billing : GATBONTON, ELVIN MAMARIL
 
-7 - Payment System : 
+7 - Payment System : GARLITOS, ANTHONY GEAN
 
 
 

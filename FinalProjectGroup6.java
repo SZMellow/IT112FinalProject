@@ -187,8 +187,37 @@ public class FinalProjectGroup6 {
     // PROCESS 3 — CHECK-IN (WALK-IN)
     // ============================================================
     public static void checkInGuest() {
-        // TODO: Guest name, room type, room number, payment
+    // NOTE: Standby lang muna ako hndi pato finished kasi nag eerror yung declaration sa initializeRooms() method sa intellij ko T-T, idk why...
+    // That issue aside pakicheck if okay lang yung gawa ko, minodify ko ung initializeRooms() sa file ko for testing and so far ang issues lang is hndi pa 
+    // cinoconsider ng method ko yung makeReservation() and always results in no rooms available kasi wala pang code sa isRoomFreeForDays() 
 
+    // ito ung initializeRooms() na ginamit ko sa file ko: 
+    /*
+        for (int i = 0; i < 15; i++) {
+            roomNumbers[i] = "S" + (101 + i);
+            roomTypes[i] = "Standard";
+            roomRates[i] = 2500;
+            roomStatus[i] = "Available";
+        }
+
+        // Deluxe Rooms
+        for (int i = 0; i < 10; i++) {
+            roomNumbers[15 + i] = "D" + (101 + i);
+            roomTypes[15 + i] = "Deluxe";
+            roomRates[15 + i] = 4000;
+            roomStatus[15 + i] = "Available";
+        }
+
+        // Suite Rooms
+        for (int i = 0; i < 5; i++) {
+            roomNumbers[25 + i] = "T" + (101 + i);
+            roomTypes[25 + i] = "Suite";
+            roomRates[25 + i] = 8000;
+            roomStatus[25 + i] = "Available";
+        }
+    */       
+        
+        // TODO: Guest name, room type, room number, payment
         // init of variables we gonna use
         Scanner sc = new Scanner(System.in);
         String roomTypeName = "empty";
@@ -202,7 +231,7 @@ public class FinalProjectGroup6 {
         System.out.print("Input Room Type: (1. Standard, 2. Deluxe, 3. Suite): ");
         int roomType = Integer.parseInt(sc.nextLine());
         
-        // setting the room descr, starting and ending point of finding rooms based sa user input and checking if its valid choice otherwise make user reenter
+        // setting the room descr, starting and ending point of finding rooms based sa users choice of roomtype and checking if its valid choice otherwise make user reenter
         while (true) {
             if (roomType == 1) { 
                 roomTypeName = "Standard";
@@ -379,9 +408,3 @@ public class FinalProjectGroup6 {
     }
 
 }
-
-
-
-
-
-

@@ -191,6 +191,38 @@ public class FinalProjectGroup6 {
         // TODO: Validate availability
         // TODO: Update roomStatus = "Occupied"
         // TODO: Fill occupancy[][]
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Input Guest Name (Walk-in): ");
+        String guestName = sc.nextLine();
+        System.out.print("Input Room Type: (1. Standard, 2. Deluxe, 3. Suite): ");
+        int roomChoice = Integer.parseInt(sc.nextLine());
+
+        // placeholders lang
+        String roomTypeName = "lala";
+        int roomFee = 0;
+
+        while (true) {
+            if (roomChoice == 1) { 
+                roomTypeName = "Standard";
+                roomFee = 2500;
+                break;
+            } else if (roomChoice == 2)  {
+                roomTypeName = "Deluxe";
+                roomExpense = 4000;
+                break;
+                } else if (roomChoice == 3) {
+                roomTypeName = "Suite";
+                roomExpense = 8000;
+                break;
+            } else {
+                System.out.println("Error! Please re-enter a valid room type.");
+                System.out.print("Input Room Type: (1. Standard, 2. Deluxe, 3. Suite): ");
+                roomChoice = sc.nextInt();
+            }
+        }
+        
     }
 
     // ============================================================
@@ -260,5 +292,6 @@ public class FinalProjectGroup6 {
     }
 
 }
+
 
 

@@ -27,7 +27,7 @@ Main Tasks
 
 4 - Reservations : ITCHON, LORENZ ANNE ESPINOSA
 
-5 - Check-In : 
+5 - Check-In : OSEJO, JOHN XAVIERE S.
 
 6 - Check-Out & Billing : GATBONTON, ELVIN MAMARIL
 

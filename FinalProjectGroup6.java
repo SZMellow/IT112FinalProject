@@ -83,11 +83,104 @@ public class FinalProjectGroup6 {
     // PROCESS 2 — MAKE NEW RESERVATION
     // ============================================================
     public static void makeReservation() {
-        // TODO: Guest inputs, day selection
-        // TODO: Find first available room for selected days
-        // TODO: Update roomStatus = "Booked"
-        // TODO: Update occupancy[][]
-        // TODO: Compute reservation fee
+        Scanner sc = new Scanner(System.in);
+
+        int totalDays = 10;
+        int standardRooms = 15;
+        int deluxeRooms = 10;
+        int suiteRooms = 5;
+
+        int totalRooms = standardRooms + deluxeRooms + suiteRooms;
+
+        String[][] room = new String[totalRooms][totalDays];
+        String status = "Available";
+
+        for (int i = 0; i < totalRooms; i++) {
+            for (int j = 0; j < totalDays; j++) {
+                room[i][j] = status;
+            }
+        }
+
+        String[] roomNames = new String[totalRooms];
+        for (int i = 0; i < standardRooms; i++) {
+            roomNames[i] = "S" + (101 + i);
+        }
+        for (int i = 0; i < deluxeRooms; i++) {
+            roomNames[standardRooms + i] = "D" + (101 + i);
+        }
+        for (int i = 0; i < suiteRooms; i++) {
+            roomNames[standardRooms + deluxeRooms + i] = "T" + (101 + i);
+        }
+
+        System.out.print("Input Guest Name: ");
+        String name = sc.next();
+
+        System.out.print("Input Room Type: (1. Standard, 2. Deluxe, 3. Suite): ");
+        int roomType = sc.nextInt();
+
+        System.out.print("Input number of days: ");
+        int daysToReserve = sc.nextInt();
+
+        int[] selectedDays = new int[daysToReserve];
+        for (int d = 0; d < daysToReserve; d++) {
+            System.out.print("Date " + (d + 1) + ": Day ");
+            selectedDays[d] = sc.nextInt() - 1; // convert to 0-indexed
+        }
+
+        int startRow = 0, endRow = 0;
+        String type = "";
+        int fee = 0;
+
+        if (roomType == 1) {
+            startRow = 0;
+            endRow = standardRooms;
+            type = "Standard";
+            fee = 2500;
+        } else if (roomType == 2) {
+            startRow = standardRooms;
+            endRow = standardRooms + deluxeRooms;
+            type = "Deluxe";
+            fee = 4000;
+        } else if (roomType == 3) {
+            startRow = standardRooms + deluxeRooms;
+            endRow = totalRooms;
+            type = "Suite";
+            fee = 8000;
+        } else {
+            System.out.println("Invalid room type!");
+        }
+
+        boolean reserved = false;
+        for (int i = startRow; i < endRow; i++) {
+            boolean available = true;
+            for (int day : selectedDays) {
+                if (!room[i][day].equals("Available")) {
+                    available = false;
+                    break;
+                }
+            }
+            if (available) {
+                for (int day : selectedDays) {
+                    room[i][day] = "Reserved";
+                }
+                reserved = true;
+                
+                System.out.println("Processing Reservation...");
+                System.out.println("Found: " + roomNames[i]);
+                System.out.println("Reservation Fee (Room Rate Only): P" + fee + "/night * " + daysToReserve + " nights = P" + (fee * daysToReserve));
+                System.out.println("---Reservation Summary---");
+                System.out.println("Guest Name: " + name);
+                System.out.println("Room Type: " + type);
+                System.out.println("Room Number Assigned: " + roomNames[i]);
+                System.out.println("Nights Booked: " + daysToReserve);
+                System.out.println("Update Status: Room " + roomNames[i] + " is now set to 'Booked' by " + name + ".");
+                break;
+            }
+        }
+
+        if (!reserved) {
+            System.out.println("Sorry! No rooms available for all selected days.");
+        }
     }
 
     // ============================================================
@@ -167,4 +260,5 @@ public class FinalProjectGroup6 {
     }
 
 }
+
 

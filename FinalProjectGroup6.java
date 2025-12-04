@@ -50,11 +50,11 @@ public class FinalProjectGroup6 {
             roomStatus[idx] = "Available";
         }
         for (int i = 0; i < 5; i++) { // Suite
-            int idx = 25 + i;
-            roomNumbers[idx] = "T" + (301 + i);
-            roomTypes[idx] = "Suite";
-            roomRates[idx] = 8000;
-            roomStatus[idx] = "Available";
+            int is = 25 + i;
+            roomNumbers[is] = "T" + (301 + i);
+            roomTypes[is] = "Suite";
+            roomRates[is] = 8000;
+            roomStatus[is] = "Available";
         }
     }
 
@@ -125,31 +125,31 @@ public class FinalProjectGroup6 {
     static void makeReservation() {
         System.out.println("\n-- MAKE NEW RESERVATION --");
         System.out.print("Guest Name: ");
-        String guest = sc.nextLine().trim(); //reads the input and removes whitespaces
+        String guest = sc.nextLine().trim();
 
-        int typeChoice = selectRoomType(); //gets room type as number from user
-        String type = roomTypeFromChoice(typeChoice); //coverts room number into string
+        int typeChoice = selectRoomType();
+        String type = roomTypeFromChoice(typeChoice);
 
-        printRoomTypeCalendar(type); //availability for selected room type
+        printRoomTypeCalendar(type);
 
         System.out.print("Enter start day (1-10): ");
-        int startDay = readInt(1, 10); //input ranges from day 1 to 10
+        int startDay = readInt(1, 10);
         System.out.print("Enter number of nights: ");
-        int nights = readInt(1, 10 - startDay + 1); //limits the number of nights so it doesn't exceed max days
+        int nights = readInt(1, 10 - startDay + 1);
 
-        int roomIndex = findFirstAvailableRoomForDays(type, startDay - 1, nights); //checks the first available room according to the requested date
-        if (roomIndex == -1) { //if no room is found
+        int roomIndex = findFirstAvailableRoomForDays(type, startDay - 1, nights);
+        if (roomIndex == -1) {
             System.out.println("No available " + type + " rooms for those days.");
-            return; //exit
+            return;
         }
 
-        double rate = roomRates[roomIndex]; //get the rate of selected rooms
+        double rate = roomRates[roomIndex];
         System.out.println("Room Found: " + roomNumbers[roomIndex]);
-        System.out.println("Reservation Fee: ₱" + (rate * nights)); //calculates the total cost
+        System.out.println("Reservation Fee: ₱" + (rate * nights));
 
-        assignRoomDays(roomIndex, startDay - 1, nights, guest); //markselected days for the room
+        assignRoomDays(roomIndex, startDay - 1, nights, guest);
 
-        if (roomStatus[roomIndex].equals("Available")) roomStatus[roomIndex] = "Booked"; //change the status to booked if it is available
+        if (roomStatus[roomIndex].equals("Available")) roomStatus[roomIndex] = "Booked";
 
         System.out.println("--- RESERVATION SUMMARY ---");
         System.out.println("Guest: " + guest);
@@ -269,18 +269,19 @@ public class FinalProjectGroup6 {
 
     }
 
-    // Print calendar
+    // Prints a 10-day calendar for a specific room type
+    // O = occupied, B = booked, empty = available
     static void printRoomTypeCalendar(String type) {
         System.out.println("\n--- AVAILABILITY TABLE (" + type + ") ---");
 
-        // Header
+        // Print table header
         System.out.printf("%-8s", "Room");
         for (int d = 1; d <= TOTAL_DAYS; d++) {
             System.out.printf("%-7s", "Day" + d);
         }
         System.out.println();
 
-        // Rows
+        // Print rows for each room of selected type
         for (int i = 0; i < TOTAL_ROOMS; i++) {
             if (!roomTypes[i].equals(type)) continue;
 
@@ -302,6 +303,7 @@ public class FinalProjectGroup6 {
         }
     }
 
+    // Returns the guest currently checked in (occupied status)
     static String findCurrentlyCheckedInGuest(int roomIndex) {
         if (!roomStatus[roomIndex].equals("Occupied")) return null;
         for (int d = 0; d < TOTAL_DAYS; d++)
@@ -333,6 +335,7 @@ public class FinalProjectGroup6 {
         return -1;
     }
 
+    // Finds a room available for a continuous range of days
     static int findFirstAvailableRoomForDays(String type, int start, int nights) {
         for (int i = 0; i < TOTAL_ROOMS; i++) {
             if (!roomTypes[i].equals(type)) continue;
@@ -345,17 +348,20 @@ public class FinalProjectGroup6 {
         return -1;
     }
 
+    // Assigns a guest to a range of dates in a room
     static void assignRoomDays(int index, int start, int nights, String guest) {
         for (int d = start; d < start + nights; d++)
             occupancy[index][d] = guest;
     }
 
+    // Returns the first occupant name found in the room
     static String findCurrentOccupant(int roomIndex) {
         for (int d = 0; d < TOTAL_DAYS; d++)
             if (occupancy[roomIndex][d] != null) return occupancy[roomIndex][d];
         return null;
     }
 
+    // Counts how many days a guest is booked in a room
     static int countGuestDays(int roomIndex, String guest) {
         int count = 0;
         for (int d = 0; d < TOTAL_DAYS; d++)
@@ -363,11 +369,13 @@ public class FinalProjectGroup6 {
         return count;
     }
 
+    // Clears all days belonging to a guest in a room
     static void clearGuestFromRoom(int index, String guest) {
         for (int d = 0; d < TOTAL_DAYS; d++)
             if (guest.equals(occupancy[index][d])) occupancy[index][d] = null;
     }
 
+    // So user can't break the program with invalid input
     static int readInt(int min, int max) {
         while (true) {
             try {
@@ -395,5 +403,3 @@ public class FinalProjectGroup6 {
         }
     }
 }
-
-

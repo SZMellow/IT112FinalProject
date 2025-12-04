@@ -160,10 +160,13 @@ public class FinalProjectGroup6 {
 
     // Walk-in check-in
     static void checkInGuest() {
+
+         // asks input for guest's name with trim to clean up spaces
         System.out.println("\n-- CHECK-IN GUEST --");
         System.out.print("Guest Name: ");
         String guest = sc.nextLine().trim();
 
+        // calls the method selectRoomType() then returns the choice from that method
         int typeChoice = selectRoomType();
         String type = roomTypeFromChoice(typeChoice);
 
@@ -403,4 +406,5 @@ public class FinalProjectGroup6 {
         }
     }
 }
+
 

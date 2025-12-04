@@ -109,30 +109,80 @@ public class FinalProjectGroup6 {
         // TODO: Reset roomStatus = "Available"
         // TODO: Clear occupancy[][]
 
-        System.out.println("Input Room Number for Check-Out: ");
-        String verifyCheckout = sc.next();
+          System.out.println("\n-- CHECK-OUT GUEST --");
 
-        //Verify here
+        // Ask for the room number to process the check-out
+        System.out.print("Enter Room Number: ");
+        String rnum = sc.nextLine().trim();
 
-        System.out.println("Subtotal (Room Rate Only): ");
-        System.out.println("Fixed Service Fee: ");
-        System.out.println("Subtotal + Fee: ");
-        System.out.println("Tax (10% of ₱8,250): ");
-        System.out.println("Total Amount Due: ");
-        System.out.println("Input Final Payment Amount: ");
-        int paymentAmount = Integer.parseInt(sc.nextLine());
+        // Look for the matching room index
+        int roomIndex = findRoomIndexByNumber(rnum);
+        if (roomIndex == -1) {
+            System.out.println("Invalid room.");
+            return;
+        }
 
-        System.out.println("Payment: " + " Received");
-        int amountPaid = Integer.parseInt(sc.nextLine());
+        // Check if the room actually has someone staying in it
+        String guest = findCurrentOccupant(roomIndex);
+        if (guest == null) {
+            System.out.println("Room has no occupant.");
+            return;
+        }
 
-        int totalChange = amountPaid - totalAmountDue;
-        System.out.println("Change Calculation: " + amountPaid + " - " + totalAmountDue +  " = " + totalChange);
+        // --- Billing computations ---
 
-        System.out.println("--- Final Bill / Receipt ---");
-        System.out.println("Guest: " + x + " | " + "Room: " + y);
-        System.out.println("TOTAL AMOUNT DUE: " + totalAmountDue);
-        System.out.println("Amount Paid: " + amountPaid);
-        System.out.println("**Change Due: " + totalChange +" **");
+        // Count how many nights the guest stayed
+        int nights = countGuestDays(roomIndex, guest);
+
+        // Basic room charge
+        double subtotal = roomRates[roomIndex] * nights;
+
+        // Fixed service fee
+        double fee = SERVICE_FEE;
+
+        // Combine room charge + service fee
+        double subandfee = subtotal + fee;
+
+        // Compute 10% tax based on the above
+        double taxed = subandfee * TAX_RATE;
+
+        // Final amount the guest needs to pay
+        double totalDue = subandfee + taxed;
+
+        // --- Bill Breakdown Display ---
+        System.out.println("\n--- Bill Calculations ---");
+        System.out.println("Subtotal (Room rate only): ₱" + subtotal);
+        System.out.println("Subtotal + Fixed Service Fee: ₱" + subandfee);
+        System.out.println("Tax (10% of " + subandfee + "): ₱" + taxed);
+        System.out.println("Total Amount Due: ₱" + subandfee + " + ₱" + taxed + " = ₱" + totalDue);
+
+        // Ask the guest how much they're paying
+        System.out.print("Input final payment amount: ₱");
+        double paid = readDouble();
+        System.out.println("Payment: ₱" + paid + " received.");
+
+        // Show the change calculation
+        System.out.println("Change calculation: ₱" + paid + " - ₱" + totalDue + " = ₱" + (paid - totalDue));
+
+        // If they didn't pay enough, stop the check-out
+        if (paid < totalDue) {
+            System.out.println("Insufficient payment. Check-out failed.");
+            return;
+        }
+
+        // --- Final Receipt ---
+        System.out.println("\n--- Final Bill / Receipt ---");
+        System.out.println("Guest: " + guest + " | Room: " + rnum);
+        System.out.println("TOTAL AMOUNT DUE: ₱" + totalDue);
+        System.out.println("Amount Paid: ₱" + paid);
+        System.out.println("Change Due: ₱" + (paid - totalDue));
+
+        // Clear the guest's stay info and free the room
+        clearGuestFromRoom(roomIndex, guest);
+        roomStatus[roomIndex] = "Available";
+
+        // Confirm completion
+        System.out.println("Check-out complete. Room " + rnum + " is now available.");
     }
 
     // ============================================================
@@ -167,4 +217,5 @@ public class FinalProjectGroup6 {
     }
 
 }
+
 

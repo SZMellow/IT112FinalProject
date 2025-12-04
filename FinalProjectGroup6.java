@@ -29,14 +29,16 @@ public class FinalProjectGroup6 {
 
 
     // Initialization
-    static void initializeRooms() {
+    static void initializeRooms() { //initializes room number, type, rates and status using for loops for each room type
         for (int i = 0; i < 15; i++) { // Standard
+            //int i will indicate which standard room is initialized
             roomNumbers[i] = "S" + (101 + i);
             roomTypes[i] = "Standard";
             roomRates[i] = 2500;
             roomStatus[i] = "Available";
         }
         for (int i = 0; i < 10; i++) { // Deluxe
+            //int idx will indicate which deluxe room is initialized, after initializing standard rooms
             int idx = 15 + i;
             roomNumbers[idx] = "D" + (201 + i);
             roomTypes[idx] = "Deluxe";
@@ -44,6 +46,7 @@ public class FinalProjectGroup6 {
             roomStatus[idx] = "Available";
         }
         for (int i = 0; i < 5; i++) { // Suite
+            //int idx will indicate which suite room is initialized, after initializing standard and deluxe rooms
             int idx = 25 + i;
             roomNumbers[idx] = "T" + (301 + i);
             roomTypes[idx] = "Suite";
@@ -335,3 +338,4 @@ public class FinalProjectGroup6 {
         }
     }
 }
+

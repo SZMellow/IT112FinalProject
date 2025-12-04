@@ -23,15 +23,15 @@ Main Tasks
 
 2 - Main Menu : 
 
-3 - Room Availability : 
+3 - Room Availability : LANSANGAN, JULIANNE ELYSE JOSE
 
-4 - Reservations : 
+4 - Reservations : ITCHON, LORENZ ANNE ESPINOSA
 
-5 - Check-In : 
+5 - Check-In : OSEJO, JOHN XAVIERE S.
 
 6 - Check-Out & Billing : GATBONTON, ELVIN MAMARIL
 
-7 - Payment System : 
+7 - Payment System : GARLITOS, ANTHONY GEAN
 
 
 

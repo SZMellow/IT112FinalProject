@@ -92,30 +92,35 @@ public class FinalProjectGroup6 {
 
     // Check availability
     static void checkRoomAvailability() {
-        // Displays room availability per type and optionally
-        // shows a 10-day visual table
+        //Displays room availability per type and optionally
+        //shows a 10-day visual table
         System.out.println("\n-- CHECK ROOM AVAILABILITY --");
+
+        //user selects room type
         int typeChoice = selectRoomType();
         String type = roomTypeFromChoice(typeChoice);
 
-        int total = 0, availableOrBooked = 0;
-        double price = 0;
+        //counters for:
+        int total = 0; //total rooms of this type
+        int = availableOrBooked = 0; //rooms that are not occupied (available or booked)
+        double price = 0; //rate's for room
 
-        // Count rooms by type and check availability
-        for (int i = 0; i < TOTAL_ROOMS; i++) {
-            if (roomTypes[i].equals(type)) {
-                total++;
-                if (!roomStatus[i].equals("Occupied")) availableOrBooked++;
-                price = roomRates[i];
+        //count rooms and determine availability summary
+        for (int i = 0; i < TOTAL_ROOMS; i++) { //goes through each room
+            if (roomTypes[i].equals(type)) { //checks if room matches selected type
+                total++; //increases count for this type
+                if (!roomStatus[i].equals("Occupied")) availableOrBooked++; //add to count if the room is free or booked
+                price = roomRates[i]; //record the room's price or rate
             }
         }
 
+        //Displays summary information
         System.out.println("\nRoom Type: " + type);
         System.out.println("Total Rooms: " + total);
         System.out.println("Available/Booked: " + availableOrBooked);
         System.out.println("Price per Night: ₱" + price);
 
-        // Optionally show calendar
+        //Option to display the 10-day calendar view for this room type
         System.out.print("Show 10-day table? (y/n): ");
         if (sc.next().trim().equalsIgnoreCase("y")) printRoomTypeCalendar(type);
         sc.nextLine();
@@ -414,6 +419,7 @@ public class FinalProjectGroup6 {
         }
     }
 }
+
 
 
 

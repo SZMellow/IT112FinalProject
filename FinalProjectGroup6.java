@@ -179,19 +179,23 @@ public class FinalProjectGroup6 {
         // we use "10 - startDay + 1" to ensure na the stay fits the 10-day calendar
         int nights = readInt(1, 10 - startDay + 1);
 
+        // the algo for searching available rooms for the chosen roomtype, it will return -1 if no rooms are available and returns the user back to main menu 
         int roomIndex = findFirstAvailableRoomForDays(type, startDay - 1, nights);
         if (roomIndex == -1) {
             System.out.println("No available rooms of that type.");
             return;
         }
 
+        // calc the total cost (room rate * no. of nights) and show which rooms the guest will occupy + how much they need to pay
         double due = roomRates[roomIndex] * nights;
         System.out.println("Room available: " + roomNumbers[roomIndex]);
         System.out.println("Payment required: ₱" + due);
 
+        // calls method assignRoomDays() para to mark/fill the days the guest will stay by putting their name in the table
         assignRoomDays(roomIndex, startDay - 1, nights, guest);
         roomStatus[roomIndex] = "Occupied";
 
+        // prints that the check in is successful and shows where the guest occupies in which room
         System.out.println("CHECK-IN SUCCESSFUL. Guest " + guest + " now occupies " + roomNumbers[roomIndex]);
     }
 
@@ -410,6 +414,7 @@ public class FinalProjectGroup6 {
         }
     }
 }
+
 
 
 

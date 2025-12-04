@@ -105,7 +105,7 @@ public class FinalProjectGroup6 {
 
         //counters for:
         int total = 0; //total rooms of this type
-        int = availableOrBooked = 0; //rooms that are not occupied (available or booked)
+        int availableOrBooked = 0; //rooms that are not occupied (available or booked)
         double price = 0; //rate's for room
 
         //count rooms and determine availability summary
@@ -311,7 +311,7 @@ public class FinalProjectGroup6 {
             for (int d = 0; d < TOTAL_DAYS; d++) {
                 String cell = "";
                 if (occupancy[i][d] != null) {
-                    if (occupiedGuest != null && occupancy[i][d].equals(occupiedGuest))
+                    if (occupancy[i][d].equals(occupiedGuest))
                         cell = "O"; // occupied
                     else
                         cell = "B"; // booked
@@ -422,6 +422,7 @@ public class FinalProjectGroup6 {
         }
     }
 }
+
 
 
 

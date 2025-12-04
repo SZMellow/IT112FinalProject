@@ -221,20 +221,29 @@ public class FinalProjectGroup6 {
     // Print calendar
     static void printRoomTypeCalendar(String type) {
         System.out.println("\n--- AVAILABILITY TABLE (" + type + ") ---");
-        System.out.println("       Day1   Day2   Day3   Day4   Day5   Day6   Day7   Day8   Day9   Day10");
 
+        // Header
+        System.out.printf("%-8s", "Room");
+        for (int d = 1; d <= TOTAL_DAYS; d++) {
+            System.out.printf("%-7s", "Day" + d);
+        }
+        System.out.println();
+
+        // Rows
         for (int i = 0; i < TOTAL_ROOMS; i++) {
             if (!roomTypes[i].equals(type)) continue;
-            System.out.printf("%-5s ", roomNumbers[i]);
+
+            System.out.printf("%-8s", roomNumbers[i]);
+
             String occupiedGuest = findCurrentlyCheckedInGuest(i);
 
             for (int d = 0; d < TOTAL_DAYS; d++) {
                 String cell = "";
                 if (occupancy[i][d] != null) {
                     if (occupiedGuest != null && occupancy[i][d].equals(occupiedGuest))
-                        cell = "O";
+                        cell = "O"; // occupied
                     else
-                        cell = "B";
+                        cell = "B"; // booked
                 }
                 System.out.printf("%-7s", cell);
             }

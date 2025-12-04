@@ -175,47 +175,85 @@ public class FinalProjectGroup6 {
 
     // Check-out + billing
     static void checkOutGuest() {
+
+
+
         System.out.println("\n-- CHECK-OUT GUEST --");
+
+        // Ask for the room number to process the check-out
         System.out.print("Enter Room Number: ");
         String rnum = sc.nextLine().trim();
 
+        // Look for the matching room index
         int roomIndex = findRoomIndexByNumber(rnum);
         if (roomIndex == -1) {
             System.out.println("Invalid room.");
             return;
         }
 
+        // Check if the room actually has someone staying in it
         String guest = findCurrentOccupant(roomIndex);
         if (guest == null) {
             System.out.println("Room has no occupant.");
             return;
         }
 
+        // --- Billing computations ---
+
+        // Count how many nights the guest stayed
         int nights = countGuestDays(roomIndex, guest);
+
+        // Basic room charge
         double subtotal = roomRates[roomIndex] * nights;
+
+        // Fixed service fee
         double fee = SERVICE_FEE;
-        double taxed = (subtotal + fee) * TAX_RATE;
-        double totalDue = subtotal + fee + taxed;
 
-        System.out.println("--- BILLING ---");
-        System.out.println("Guest: " + guest);
-        System.out.println("Room: " + rnum);
-        System.out.println("Subtotal: ₱" + subtotal);
-        System.out.println("Service Fee: ₱" + fee);
-        System.out.println("Tax: ₱" + taxed);
-        System.out.println("TOTAL: ₱" + totalDue);
+        // Combine room charge + service fee
+        double subandfee = subtotal + fee;
 
-        System.out.print("Enter payment: ₱");
+        // Compute 10% tax based on the above
+        double taxed = subandfee * TAX_RATE;
+
+        // Final amount the guest needs to pay
+        double totalDue = subandfee + taxed;
+
+        // --- Bill Breakdown Display ---
+        System.out.println("\n--- Bill Calculations ---");
+        System.out.println("Subtotal (Room rate only): ₱" + subtotal);
+        System.out.println("Subtotal + Fixed Service Fee: ₱" + subandfee);
+        System.out.println("Tax (10% of " + subandfee + "): ₱" + taxed);
+        System.out.println("Total Amount Due: ₱" + subandfee + " + ₱" + taxed + " = ₱" + totalDue);
+
+        // Ask the guest how much they're paying
+        System.out.print("Input final payment amount: ₱");
         double paid = readDouble();
+        System.out.println("Payment: ₱" + paid + " received.");
+
+        // Show the change calculation
+        System.out.println("Change calculation: ₱" + paid + " - ₱" + totalDue + " = ₱" + (paid - totalDue));
+
+        // If they didn't pay enough, stop the check-out
         if (paid < totalDue) {
             System.out.println("Insufficient payment. Check-out failed.");
             return;
         }
-        System.out.println("Payment successful. Change: ₱" + (paid - totalDue));
 
+        // --- Final Receipt ---
+        System.out.println("\n--- Final Bill / Receipt ---");
+        System.out.println("Guest: " + guest + " | Room: " + rnum);
+        System.out.println("TOTAL AMOUNT DUE: ₱" + totalDue);
+        System.out.println("Amount Paid: ₱" + paid);
+        System.out.println("Change Due: ₱" + (paid - totalDue));
+
+        // Clear the guest's stay info and free the room
         clearGuestFromRoom(roomIndex, guest);
         roomStatus[roomIndex] = "Available";
+
+        // Confirm completion
         System.out.println("Check-out complete. Room " + rnum + " is now available.");
+
+
     }
 
     // Print calendar
@@ -344,3 +382,4 @@ public class FinalProjectGroup6 {
         }
     }
 }
+

@@ -166,13 +166,17 @@ public class FinalProjectGroup6 {
         System.out.print("Guest Name: ");
         String guest = sc.nextLine().trim();
 
-        // calls the method selectRoomType() then returns the choice from that method
+        // initialize integer typeChoice to be from the method selectRoomType() to return the choice from that method
         int typeChoice = selectRoomType();
-        String type = roomTypeFromChoice(typeChoice);
+        String type = roomTypeFromChoice(typeChoice); // this is where it converts the choice into a string (either standard, deluxe, suite)
 
+        // asks for guests check in day at kung how many nights the guest will stay
         System.out.print("Enter start day (1-10): ");
+        // TLDR: means calls method readInt() to validate input so the user cannot enter letters or invalid numbers (refer nalang sa readInt() method below for more detailed info kung how that fully works)
         int startDay = readInt(1, 10);
         System.out.print("Enter nights: ");
+        
+        // we use "10 - startDay + 1" to ensure na the stay fits the 10-day calendar
         int nights = readInt(1, 10 - startDay + 1);
 
         int roomIndex = findFirstAvailableRoomForDays(type, startDay - 1, nights);
@@ -406,5 +410,6 @@ public class FinalProjectGroup6 {
         }
     }
 }
+
 
 

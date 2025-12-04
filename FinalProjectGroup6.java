@@ -9,7 +9,12 @@ public class FinalProjectGroup6 {
     static final double TAX_RATE = 0.10;
 
 
-    // Room data
+    // ARRAYS storing room data and occupancy information
+    // roomNumbers - Room IDs like S101, D201, etc.
+    // roomTypes - Standard / Deluxe / Suite
+    // roomRates - Price per night per room
+    // roomStatus - Available / Booked / Occupied
+    // occupancy - 10-day schedule storing guest names or null
     static String[] roomNumbers = new String[TOTAL_ROOMS];
     static String[] roomTypes = new String[TOTAL_ROOMS];
     static double[] roomRates = new double[TOTAL_ROOMS];
@@ -20,6 +25,7 @@ public class FinalProjectGroup6 {
 
     // MAIN Method
     public static void main(String[] args) {
+        // Initializes room info and calendar, then opens main menu
         initializeRooms();
         initializeCalendar();
         System.out.println("Welcome to the Grand Hotel System!");
@@ -59,7 +65,11 @@ public class FinalProjectGroup6 {
 
     // Main Menu
     static void mainMenu() {
+
+        //variable for the choice
         int choice;
+
+        //do while loop to keep showing the menu
         do {
             System.out.println("\n=== MAIN MENU ===");
             System.out.println("1. Check Room Availability");
@@ -70,6 +80,7 @@ public class FinalProjectGroup6 {
             System.out.print("Enter choice: ");
             choice = readInt(1, 5);
 
+            // Switch menu options
             switch (choice) {
                 case 1 -> checkRoomAvailability();
                 case 2 -> makeReservation();
@@ -81,6 +92,8 @@ public class FinalProjectGroup6 {
 
     // Check availability
     static void checkRoomAvailability() {
+        // Displays room availability per type and optionally
+        // shows a 10-day visual table
         System.out.println("\n-- CHECK ROOM AVAILABILITY --");
         int typeChoice = selectRoomType();
         String type = roomTypeFromChoice(typeChoice);
@@ -88,6 +101,7 @@ public class FinalProjectGroup6 {
         int total = 0, availableOrBooked = 0;
         double price = 0;
 
+        // Count rooms by type and check availability
         for (int i = 0; i < TOTAL_ROOMS; i++) {
             if (roomTypes[i].equals(type)) {
                 total++;
@@ -101,6 +115,7 @@ public class FinalProjectGroup6 {
         System.out.println("Available/Booked: " + availableOrBooked);
         System.out.println("Price per Night: ₱" + price);
 
+        // Optionally show calendar
         System.out.print("Show 10-day table? (y/n): ");
         if (sc.next().trim().equalsIgnoreCase("y")) printRoomTypeCalendar(type);
         sc.nextLine();
@@ -175,8 +190,6 @@ public class FinalProjectGroup6 {
 
     // Check-out + billing
     static void checkOutGuest() {
-
-
 
         System.out.println("\n-- CHECK-OUT GUEST --");
 

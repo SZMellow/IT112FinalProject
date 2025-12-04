@@ -125,31 +125,31 @@ public class FinalProjectGroup6 {
     static void makeReservation() {
         System.out.println("\n-- MAKE NEW RESERVATION --");
         System.out.print("Guest Name: ");
-        String guest = sc.nextLine().trim();
+        String guest = sc.nextLine().trim(); //reads the input and removes whitespaces
 
-        int typeChoice = selectRoomType();
-        String type = roomTypeFromChoice(typeChoice);
+        int typeChoice = selectRoomType(); //gets room type as number from user
+        String type = roomTypeFromChoice(typeChoice); //coverts room number into string
 
-        printRoomTypeCalendar(type);
+        printRoomTypeCalendar(type); //availability for selected room type
 
         System.out.print("Enter start day (1-10): ");
-        int startDay = readInt(1, 10);
+        int startDay = readInt(1, 10); //input ranges from day 1 to 10
         System.out.print("Enter number of nights: ");
-        int nights = readInt(1, 10 - startDay + 1);
+        int nights = readInt(1, 10 - startDay + 1); //limits the number of nights so it doesn't exceed max days
 
-        int roomIndex = findFirstAvailableRoomForDays(type, startDay - 1, nights);
-        if (roomIndex == -1) {
+        int roomIndex = findFirstAvailableRoomForDays(type, startDay - 1, nights); //checks the first available room according to the requested date
+        if (roomIndex == -1) { //if no room is found
             System.out.println("No available " + type + " rooms for those days.");
-            return;
+            return; //exit
         }
 
-        double rate = roomRates[roomIndex];
+        double rate = roomRates[roomIndex]; //get the rate of selected rooms
         System.out.println("Room Found: " + roomNumbers[roomIndex]);
-        System.out.println("Reservation Fee: ₱" + (rate * nights));
+        System.out.println("Reservation Fee: ₱" + (rate * nights)); //calculates the total cost
 
-        assignRoomDays(roomIndex, startDay - 1, nights, guest);
+        assignRoomDays(roomIndex, startDay - 1, nights, guest); //markselected days for the room
 
-        if (roomStatus[roomIndex].equals("Available")) roomStatus[roomIndex] = "Booked";
+        if (roomStatus[roomIndex].equals("Available")) roomStatus[roomIndex] = "Booked"; //change the status to booked if it is available
 
         System.out.println("--- RESERVATION SUMMARY ---");
         System.out.println("Guest: " + guest);
@@ -395,4 +395,5 @@ public class FinalProjectGroup6 {
         }
     }
 }
+
 
